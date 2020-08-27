@@ -58,7 +58,7 @@ Vagrant.configure("2") do |config|
   config.vm.provider "virtualbox" do |vb|
     
     # name the Virtual Box (what appears in the Virtual Box GUI)
-    vb.name = ( ENV['machine'] || "php" )
+    vb.name = "php"
     
     # Customize the amount of memory on the VM
     vb.memory = "2048"
