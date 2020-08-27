@@ -1,0 +1,7 @@
+---
+# Based on https://github.com/geerlingguy/ansible-role-php/blob/master/defaults/main.yml
+# Based on https://github.com/do-community/ansible-playbooks
+
+os: "Ubuntu-18"
+os_packages: [ 'bash', 'curl', 'snmp', 'build-essential', 'pkg-config']
+os_package_state: present

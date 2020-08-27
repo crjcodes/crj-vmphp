@@ -1,0 +1,53 @@
+---
+# COMMON
+#
+# role: common
+# install items common to every setup 
+
+# GOTCHA:
+# these tasks should be run as the root user, the Vagrant default,
+# but they error out without setting become: True
+# Not sure why yet
+ 
+# Make sure everything is cleaned up from the previous pass in light of
+# the bug with corrupted apt packages and Ansible per
+# https://github.com/ansible/ansible-modules-core/issues/2951
+
+
+# TODO: confirm assumption this run as root
+- name: apt update
+  become: true
+  apt: 
+    update_cache: yes 
+    cache_valid_time: 3600
+  register: apt_result
+  until: apt_result is success
+  retries: 3
+  delay: 1
+  ignore_errors: yes
+
+# Autcclean and autoremove become important only after using the same VM over and over for awhile
+
+# cleans the local repository of retrieved package files that can no longer be downloaded.
+- name: Automatically remove useless packages from the cache
+  become: true
+  apt: 
+    autoclean: yes
+
+- name: Automatically remove useless dependencies
+  become: true
+  apt: 
+    autoremove: yes
+
+- name: Safe system upgrade via aptitude
+  apt: 
+    upgrade: safe
+  connection: local
+  become: true
+
+- name: Ensure basic tools and packages are present
+  apt: 
+    pkg: "{{ os_packages }}"
+    update_cache: true 
+    state: "{{ os_package_state }}"
+  become: true
