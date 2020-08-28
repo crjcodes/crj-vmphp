@@ -53,13 +53,13 @@ Vagrant.configure("2") do |config|
   # the default name of "ror" will be used unless you set an environment variable
   # as below in two places
 
-  config.vm.define "php"
-  config.vm.hostname = "php"
+  config.vm.define "phpdev"
+  config.vm.hostname = "phpdev"
 
   config.vm.provider "virtualbox" do |vb|
     
     # name the Virtual Box (what appears in the Virtual Box GUI)
-    vb.name = "php"
+    vb.name = "phpdev"
     
     # Customize the amount of memory on the VM
     vb.memory = "2048"

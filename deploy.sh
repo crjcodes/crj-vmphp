@@ -34,7 +34,7 @@ arg2="${2:-}"
 arg3="${3:-}"
 
 default_deploy_path="/f/dev/work/vm/"
-default_machine="php"
+default_machine="phpdev"
 
 #=================================
 # ERROR CHECKING
@@ -96,7 +96,9 @@ fi
 #---------------------------------
 # VM NAME FOR THIS LAUNCH
 
-fullpath="${deploy}/${mach}"
+fullpath="${deploy}${mach}"
+echo "=== INFO: full path is ${fullpath}"
+
 if [ ! -d "${fullpath}" ] 
 then
   echo "=== INFO: making directory, ${mach}"
