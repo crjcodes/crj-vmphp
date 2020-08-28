@@ -28,8 +28,8 @@
     check_implicit_admin: yes
     priv: "*.*:ALL,GRANT"
   with_items:
-    - {{ v_hostname }}
-    - {{ v_ip_address }}
+    - "{{ v_hostname }}"
+    - "{{ v_ip_address }}"
     - ::1
     - localhost
   become: true

@@ -1,3 +1,11 @@
+# General Notes
+
+* To update the Ubuntu box to a later version, after the box has been downloaded (first vagrant up after a cleanup):
+`vagrant box update`
+* If it keeps telling you it can't start up the vm because one of that name already exists, Use the Oracle Virtual Box Manager to remove all the files for the VM of that name
+
+
+
 # To Correct
 
 ## 1 [RESOLVED]

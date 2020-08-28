@@ -1,12 +1,21 @@
 ---
 
 ## Dependencies
-- name: Add repository for PHP 7.
-  apt_repository: repo='ppa:ondrej/php'
+
+# 
+# non-interactive: sudo add-apt-repository ppa:ondrej/php
+# FIX
+- name: Add repository for PHP 7
+  apt_repository: 
+    repo: 'ppa:ondrej/php'
+    update_cache: true 
+    state: "{{ php_packages_state }}"
+  become: true
+    
 
 - name: Ensure php packages are installed
   apt: 
-    pkg: "{{ php_packages }}"
+    pkg: "{{ php_packages }}" 
     update_cache: true 
     state: "{{ php_packages_state }}"
   become: true
@@ -14,3 +23,9 @@
 ## Install
 
 ## Configure
+
+- name: PHP | restart fpm
+  service: 
+    name: "php{{ php_version }}-fpm" 
+    state: restarted
+  become: true

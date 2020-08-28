@@ -10,6 +10,6 @@
 
   roles:
     - osPackages
-    - db
+#    - db
     - php
     - personalize

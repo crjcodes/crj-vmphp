@@ -1,8 +1,9 @@
+---
 db_packages: [ 'mysql-server', 'python3-pymysql' ]
 db_packages_state: present
 
-db_hostname: {{ v_hostname }}
-db_ip: {{ v_ip_address }}
+db_hostname: "{{ v_hostname }}"
+db_ip: "{{ v_ip_address }}"
 
 mysql_root_password: "cola"
 #http_host: "your_domain"

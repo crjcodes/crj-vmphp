@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. 
-  config.vm.network "forwarded_port", guest: 80, host: 80
+  # config.vm.network "forwarded_port", guest: 3000, host: 3000
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -53,6 +53,7 @@ Vagrant.configure("2") do |config|
   # the default name of "ror" will be used unless you set an environment variable
   # as below in two places
 
+  config.vm.define "php"
   config.vm.hostname = "php"
 
   config.vm.provider "virtualbox" do |vb|
@@ -65,7 +66,7 @@ Vagrant.configure("2") do |config|
     vb.cpus = 4
 
     # when doing web dev, sometimes launching a web browser is necessary
-    vb.gui = true
+    vb.gui = false
   end
 
   #--------------------------------------
@@ -78,11 +79,6 @@ Vagrant.configure("2") do |config|
   #  if Vagrant.has_plugin?("vagrant-vbguest")
   #    config.vbguest.auto_update = false  
   #  end
-
-  # One needs to enter the command below after deployment
-  # Per https://kvz.io/vagrant-tip-keep-virtualbox-guest-additions-in-sync.html
-
-  #  vagrant plugin install vagrant-vbguest
 
 
   # Install ansible on the vm (tricky to install on Windows)
