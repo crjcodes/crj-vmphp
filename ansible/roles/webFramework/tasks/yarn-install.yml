@@ -1,0 +1,62 @@
+---
+
+# See also
+#   https://classic.yarnpkg.com/en/docs/install/#debian-stable
+#   and
+#   https://github.com/fubarhouse/ansible-role-yarn/blob/master/tasks/yarn-Debian.yml
+
+- name: "Yarn | GPG"
+  become: True
+  apt_key:
+    url: https://dl.yarnpkg.com/debian/pubkey.gpg
+    state: present
+
+- name: "Yarn | Ensure Debian sources list file exists"
+  become: True
+  file:
+    path: /etc/apt/sources.list.d/yarn.list
+    owner: root
+    mode: 0644
+    state: touch
+
+- name: "Yarn | Ensure Debian package is in sources list"
+  become: True
+  lineinfile:
+    dest: /etc/apt/sources.list.d/yarn.list
+    regexp: 'deb http://dl.yarnpkg.com/debian/ stable main'
+    line: 'deb http://dl.yarnpkg.com/debian/ stable main'
+    state: present
+
+- name: "Yarn | Update APT cache"
+  become: True
+  apt:
+    update_cache: yes
+    
+- name: "Yarn | Install"
+  become: True
+  package:
+    name: yarn
+    state: present
+  register: task_result
+  until: task_result is success
+  retries: 10
+  delay: 2
+
+- name: "Yarn | Configure shell profiles"
+  become: True
+  lineinfile:
+    dest: "{{ usr_path }}{{ item }}"
+    regexp: "PATH:{{ yarn_global_path }}/bin"
+    line:  'export PATH="$PATH:{{ yarn_global_path }}/bin";'
+    state: present
+  failed_when: false
+  with_items:
+    - "{{ yarn_shell_profiles }}"
+
+- name: "Yarn | Verify tree"
+  become: True
+  command: "yarn --verify-tree"
+
+# Make sure all packages are up to date 
+- name: Make sure all yarn packages are up-to-date
+  command: "yarn install --check-files"

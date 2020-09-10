@@ -1,0 +1,26 @@
+---
+
+nodejs_ver: "13.x"
+react_node_version: 10.x
+ 
+# Name of UID 0 user
+root_user: 'root'
+
+# Name of GID 0 group -- BSD systems typically use wheel instead of root
+root_group: '{{ root_user }}'
+  
+#=======================================
+# Defaults for nodejs, rails, and more
+
+# see rvm task's default main.yml for ruby versions installed
+
+
+# TODO: usr path should be common to all Ansible files, not just
+# this task
+
+usr_path: /home/vagrant/
+
+yarn_shell_profiles:
+  - .profile
+  
+yarn_global_path: /usr/bin

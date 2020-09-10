@@ -1,0 +1,11 @@
+---
+  
+- name: Install nodejs
+  import_tasks: nodejs-install.yml
+  
+- name: Install yarn
+  import_tasks: yarn-install.yml
+
+- name: Install react
+  import_tasks: react-install.yml
+    

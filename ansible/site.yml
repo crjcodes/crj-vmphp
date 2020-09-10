@@ -12,4 +12,5 @@
     - osPackages
 #    - db
     - php
+    - webFramework
     - personalize
